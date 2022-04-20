@@ -12,21 +12,21 @@
     <title>Using tags via AWS CLI  :: AWS System Manager</title>
 
     
-    <link href="/css/nucleus.css?1650475947" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1650475947" rel="stylesheet">
-    <link href="/css/hybrid.css?1650475947" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1650475947" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1650475947" rel="stylesheet">
-    <link href="/css/auto-complete.css?1650475947" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1650475947" rel="stylesheet">
-    <link href="/css/theme.css?1650475947" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1650475947" rel="stylesheet">
+    <link href="/css/nucleus.css?1650476532" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1650476532" rel="stylesheet">
+    <link href="/css/hybrid.css?1650476532" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1650476532" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1650476532" rel="stylesheet">
+    <link href="/css/auto-complete.css?1650476532" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1650476532" rel="stylesheet">
+    <link href="/css/theme.css?1650476532" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1650476532" rel="stylesheet">
     
-    <link href="/css/theme-workshop.css?1650475947" rel="stylesheet">
+    <link href="/css/theme-workshop.css?1650476532" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1650475947"></script>
+    <script src="/js/jquery-3.3.1.min.js?1650476532"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1650475947"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1650475947"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1650476532"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1650476532"></script>
 <script type="text/javascript">
     
         var baseurl = "";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1650475947"></script>
+<script type="text/javascript" src="/js/search.js?1650476532"></script>
 
     
   </div>
@@ -521,10 +521,10 @@
 </ul>
 <h4 id="adding-tags-to-an-existing-ec2-resource">Adding tags to an existing EC2 resource</h4>
 <p>From the CLI, invoke <code>ec2 create-tags</code> with flags <code>—resources</code> and <code>—tags</code></p>
-<pre><code> aws ec2 create-tags —resources &lt;ResourceID&gt; —tags Key=&lt;Key&gt;, value=&lt;Value&gt;
+<pre><code> aws ec2 create-tags --resources &lt;ResourceID&gt; --tags Key=&lt;Key&gt;,Value=&lt;Value&gt;
 </code></pre>
 <p>For example, if you wanted to create a tag of “Key=Environment, Value=Test” for an EC2 instance resource, your parameters will be:</p>
-<pre><code> aws ec2 create-tags —resources i-01234example56789 —tags Key=Environment, Value=Test
+<pre><code> aws ec2 create-tags --resources i-01234example56789 --tags Key=Environment,Value=Test
 </code></pre>
 <p><img src="/images/tag2/1.2_TagResource.png?width=90pc" alt="1.2"></p>
 <h4 id="adding-a-tag-to-a-new-resource">Adding a tag to a new resource</h4>
@@ -532,17 +532,17 @@
 <p>From the CLI, invoke <code>ec2 run-instances</code> to create a new virtual machine and use the flag <code>—tag-specifications</code> to declare tag information:</p>
 <pre><code>aws ec2 run-instances
 
-—--image-id &lt;image-id&gt; 
+--image-id &lt;image-id&gt; 
 
-—--count 1
+--count 1
 
-—--instance-type t2.micro
+--instance-type t2.micro
 
-—--key-name &lt;YourKeyPair&gt; 
+--key-name &lt;YourKeyPair&gt; 
 
-—--subnet-id &lt;YouSubnetID&gt; 
+--subnet-id &lt;YouSubnetID&gt; 
 
-—--tag-specifications resourceType=Instance,Tags=[{Key=Environment,Value=Test}] resourceType=Volume,Tags=[{Key=Environment,Value=Test}] 
+--tag-specifications resourceType=Instance,Tags=[{Key=Environment,Value=Test}] resourceType=Volume,Tags=[{Key=Environment,Value=Test}] 
 #Volume created with the instance will also have the tag &quot;Key=Environment, Value=Test&quot;`
 </code></pre>
 <p><strong>Note</strong>: You will have to replace the appropriate parameters for your account.
@@ -552,13 +552,13 @@ The image below illustrates sample output:</p>
 <p>From the CLI, invoke <code>ec2 create-volume</code> to create a new volume and use the flag <code>—tag-specifications</code> to declare the following tag information:</p>
 <pre><code>aws ec2 create-volume
 
-—--availability-zone ap-southeast-1a
+--availability-zone ap-southeast-1a
 
-—--volume-type gp2
+--volume-type gp2
 
-—--size 80
+--size 80
 
-—--tag-specifications resourceType=Volume,Tags=[{Key=Environment,Value=Test},{Key=Cost-Center,Value=CC123}]
+--tag-specifications resourceType=Volume,Tags=[{Key=Environment,Value=Test},{Key=Cost-Center,Value=CC123}]
 </code></pre>
 <p>#Volume will be assigned 2 tags as &ldquo;Key=Environment, Value=Test&rdquo; and &ldquo;Key=Cost-Center, Value=CC123&rdquo;</p>
 <p><strong>Note:</strong> You will have to replace the appropriate parameters for your account.
@@ -566,7 +566,7 @@ The picture below illustrates sample output:</p>
 <p><img src="/images/tag2/1.2_CreateVolume.png?width=90pc" alt="1.2"></p>
 <h4 id="description-of-tagged-resources">Description of tagged resources</h4>
 <p>From the CLI, invoke <code>ec2 derscibe-instances</code> with the flag <code>—filters</code>:</p>
-<pre><code>aws ec2 describe-instances —--filters Name=tag-key, Values=&lt;SampleTagKey&gt;
+<pre><code>aws ec2 describe-instances --filters Name=tag-key,Values=&lt;SampleTagKey&gt;
 </code></pre>
 <p>The picture below illustrates sample output:</p>
 <p><img src="/images/tag2/1.2_Describe.png?width=90pc" alt="1.2"></p>
@@ -767,19 +767,19 @@ The picture below illustrates sample output:</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1650475947"></script>
-    <script src="/js/perfect-scrollbar.min.js?1650475947"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1650475947"></script>
-    <script src="/js/jquery.sticky.js?1650475947"></script>
-    <script src="/js/featherlight.min.js?1650475947"></script>
-    <script src="/js/highlight.pack.js?1650475947"></script>
+    <script src="/js/clipboard.min.js?1650476532"></script>
+    <script src="/js/perfect-scrollbar.min.js?1650476532"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1650476532"></script>
+    <script src="/js/jquery.sticky.js?1650476532"></script>
+    <script src="/js/featherlight.min.js?1650476532"></script>
+    <script src="/js/highlight.pack.js?1650476532"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1650475947"></script>
-    <script src="/js/learn.js?1650475947"></script>
-    <script src="/js/hugo-learn.js?1650475947"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1650476532"></script>
+    <script src="/js/learn.js?1650476532"></script>
+    <script src="/js/hugo-learn.js?1650476532"></script>
 
-    <link href="/mermaid/mermaid.css?1650475947" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1650475947"></script>
+    <link href="/mermaid/mermaid.css?1650476532" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1650476532"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

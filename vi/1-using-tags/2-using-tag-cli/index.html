@@ -12,21 +12,21 @@
     <title>Sử dụng tag bằng CLI  :: Cách viết một Lab Guide</title>
 
     
-    <link href="/css/nucleus.css?1650475947" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1650475947" rel="stylesheet">
-    <link href="/css/hybrid.css?1650475947" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1650475947" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1650475947" rel="stylesheet">
-    <link href="/css/auto-complete.css?1650475947" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1650475947" rel="stylesheet">
-    <link href="/css/theme.css?1650475947" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1650475947" rel="stylesheet">
+    <link href="/css/nucleus.css?1650476532" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1650476532" rel="stylesheet">
+    <link href="/css/hybrid.css?1650476532" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1650476532" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1650476532" rel="stylesheet">
+    <link href="/css/auto-complete.css?1650476532" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1650476532" rel="stylesheet">
+    <link href="/css/theme.css?1650476532" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1650476532" rel="stylesheet">
     
-    <link href="/css/theme-workshop.css?1650475947" rel="stylesheet">
+    <link href="/css/theme-workshop.css?1650476532" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1650475947"></script>
+    <script src="/js/jquery-3.3.1.min.js?1650476532"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1650475947"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1650475947"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1650476532"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1650476532"></script>
 <script type="text/javascript">
     
         var baseurl = "\/vi";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1650475947"></script>
+<script type="text/javascript" src="/js/search.js?1650476532"></script>
 
     
   </div>
@@ -523,12 +523,12 @@
 <ol>
 <li>Sử dụng CLI <code>ec2 create-tags</code>  với tham số <code>—resources</code> và <code>—tags</code></li>
 </ol>
-<pre><code>aws ec2 create-tags —resources &lt;ResourceID&gt; —tags Key=&lt;Key&gt;, value=&lt;Value&gt;
+<pre><code>aws ec2 create-tags --resources &lt;ResourceID&gt; --tags Key=&lt;Key&gt;,Value=&lt;Value&gt;
 </code></pre>
 <ol start="2">
 <li>Ví dụ: bạn muốn tạo tag là <strong>“Key=Environment,Value=Test”</strong> cho tài nguyên là một EC2 instance. Vậy, tham số của bạn sẽ là:</li>
 </ol>
-<pre><code>aws ec2 create-tags —resources i-01234example56789 —tags Key=Environment, Value=Test
+<pre><code>aws ec2 create-tags --resources i-01234example56789 --tags Key=Environment,Value=Test
 </code></pre>
 <p><img src="/images/tag2/1.2_TagResource.png?width=90pc" alt="1.2"></p>
 <h4 id="thêm-tag-cho-tài-nguyên-mới">Thêm tag cho tài nguyên mới</h4>
@@ -538,17 +538,17 @@
 </ol>
 <pre><code>aws ec2 run-instances
 
-—--image-id &lt;image-id&gt; 
+--image-id &lt;image-id&gt; 
 
-—--count 1
+--count 1
 
-—--instance-type t2.micro
+--instance-type t2.micro
 
-—--key-name &lt;YourKeyPair&gt; 
+--key-name &lt;YourKeyPair&gt; 
 
-—--subnet-id &lt;YouSubnetID&gt; 
+--subnet-id &lt;YouSubnetID&gt; 
 
-—--tag-specifications resourceType=Instance,Tags=[{Key=Environment,Value=Test}] resourceType=Volume,Tags=[{Key=Environment,Value=Test}] 
+--tag-specifications resourceType=Instance,Tags=[{Key=Environment,Value=Test}] resourceType=Volume,Tags=[{Key=Environment,Value=Test}] 
 #Volume created with the instance will also have the tag &quot;Key=Environment, Value=Test&quot;`
 </code></pre>
 <ol start="2">
@@ -561,13 +561,13 @@
 </ol>
 <pre><code>aws ec2 create-volume
 
-—--availability-zone ap-southeast-1a
+--availability-zone ap-southeast-1a
 
-—--volume-type gp2
+--volume-type gp2
 
-—--size 80
+--size 80
 
-—--tag-specifications resourceType=Volume,Tags=[{Key=Environment,Value=Test},{Key=Cost-Center,Value=CC123}]
+--tag-specifications resourceType=Volume,Tags=[{Key=Environment,Value=Test},{Key=Cost-Center,Value=CC123}]
 </code></pre>
 <p>#Volume will be assigned 2 tags as &ldquo;Key=Environment, Value=Test&rdquo; and &ldquo;Key=Cost-Center, Value=CC123&rdquo;</p>
 <ol start="2">
@@ -578,7 +578,7 @@
 <ol>
 <li>Sử dụng CLI <code>derscibe-instances</code> với tham số <code>--filters</code>:</li>
 </ol>
-<pre><code>aws ec2 describe-instances —--filters Name=tag-key, Values=&lt;SampleTagKey&gt;
+<pre><code>aws ec2 describe-instances --filters Name=tag-key,Values=&lt;SampleTagKey&gt;
 </code></pre>
 <ol start="2">
 <li>Hình dưới dây là một ví dụ:</li>
@@ -781,19 +781,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1650475947"></script>
-    <script src="/js/perfect-scrollbar.min.js?1650475947"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1650475947"></script>
-    <script src="/js/jquery.sticky.js?1650475947"></script>
-    <script src="/js/featherlight.min.js?1650475947"></script>
-    <script src="/js/highlight.pack.js?1650475947"></script>
+    <script src="/js/clipboard.min.js?1650476532"></script>
+    <script src="/js/perfect-scrollbar.min.js?1650476532"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1650476532"></script>
+    <script src="/js/jquery.sticky.js?1650476532"></script>
+    <script src="/js/featherlight.min.js?1650476532"></script>
+    <script src="/js/highlight.pack.js?1650476532"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1650475947"></script>
-    <script src="/js/learn.js?1650475947"></script>
-    <script src="/js/hugo-learn.js?1650475947"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1650476532"></script>
+    <script src="/js/learn.js?1650476532"></script>
+    <script src="/js/hugo-learn.js?1650476532"></script>
 
-    <link href="/mermaid/mermaid.css?1650475947" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1650475947"></script>
+    <link href="/mermaid/mermaid.css?1650476532" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1650476532"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
