@@ -1,0 +1,78 @@
+[
+{
+	"uri": "/1-using-tags/",
+	"title": " Using tags",
+	"tags": [],
+	"description": "",
+	"content": "Besides tagging for resource organization, tags can facilitate cost allocation, automation, and access control. In this lab, we will walk through tagging resources, adding and deleting tags on resources, and filtering the tagged resources.\nContent:\n Using tags via AWS Console Using tags via AWS CLI  "
+},
+{
+	"uri": "/",
+	"title": "Managing Resources with Tags",
+	"tags": [],
+	"description": "",
+	"content": "MANAGE RESOURCES USING TAGS AND RESOURCE GROUPS Overview Tags are key and value pairs that act as metadata for organizing your AWS resources. With most AWS resources, you have the option of adding tags when you create the resource, whether it’s an Amazon EC2 instance, an Amazon S3 bucket, or other resource. This lab will walkthrough assigning resource tags and using Resource Groups\nTag Tags are words or phrases that act as metadata that you can use to identify and organize your AWS resources. A resource can have up to 50 user-applied tags. It can also have read-only system tags. Each tag consists of a key and one optional value.\nTags allow categorizing AWS resources in a variety of ways - such as grouping them by purpose, owner, or environment. This becomes useful when there are multiple resources of the same type, and you want to identify a specific resource based on some properties that have been assigned to it.\nAWS Resource Groups AWS Resource Groups is the service that lets you manage and automate tasks on large numbers of resources at one time. In AWS, a resource is an entity that you can work with. Examples include an Amazon EC2 instance, an AWS CloudFormation stack, or an Amazon S3 bucket. If you work with multiple resources, you might find it useful to manage them as a group rather than move from one AWS service to another for each task. A resource group is a collection of AWS resources that are all in the same AWS Region, and that match the criteria specified in the group’s query. In Resource Groups, there are two types of queries you can use to build a group: Tag-based and AWS CloudFormation stack-based.\nContent  Using tags Creating a Resource Group Resource Cleanup  "
+},
+{
+	"uri": "/1-using-tags/1-using-tags-console/",
+	"title": " Using tags via AWS Console",
+	"tags": [],
+	"description": "",
+	"content": "Overview In this section, we will practice tagging operations from the AWS Management Console.\nContent\n Create EC2 Instance with tag Add or delete tag Filter resources by tag  "
+},
+{
+	"uri": "/1-using-tags/1-using-tags-console/1.1.1-newec2/",
+	"title": "Creating an EC2 Instance with a tag ",
+	"tags": [],
+	"description": "",
+	"content": "Create EC2 Instance with tag  Visit EC2 Management Console and click Launch Instances.  In this workshop, we will use the Singapore region (ap-southeast-1). If you want to use another Region, be sure to move the Region back to the Region you want to use when creating workshop-related resources.\n\rClick Select to proceed with the Amazon Linux AMI  On Choose Instance Type, click Review and Launch.  On the Review Instance Launch page, scroll the screen to the bottom towards the Tag section. Click Edit Tags to modify this EC2 instance’s tags.  Click Add Tag to proceed with adding tags  Add the following tags as shown below and click Review and Launch.     Key Value     Owner Yourname   Service Yourservice   Environment Test    You can download the best-practices guide to implementing an effective AWS resource tagging strategy below.\n\r\r\rAWS Tagging Best practices\r\r\raws-tagging-best-practices.pdf\r\r(581 ko)\r\r\r\rClick Launch to proceed with creating your EC2 instance.  Select Create a new key pair   Select key pair type as RSA. Name key pair name as Testtagging. Click Download Key Pair. Click Launch Instances.   Click View Instances to see the EC2 instance we just created.\n  Click on the EC2 Instance we just created.\n   Click the Tags tab to check the created tags.  Repeat steps 1 - 10 to create additional EC2 Instance with the following Tags:     Key Value     Owner Yourname   Service Yourservice   Environment UAT     We can avoid creating a new key-pair by reusing the key-pair that we just created to initialize the second EC2 instance.\n After clicking Launch on the Review Instance Launch page: Select Choose an existing key pair. Select key pair Testtagging. Click select I knowledge that I have access to the corresponding private key file, and that without this file, I won’t be able to log into my instance. Click Launch. Click View Instance. \\  \rNext, we will modify these tags.\n"
+},
+{
+	"uri": "/1-using-tags/1-using-tags-console/1.1.2-add-remove-tags/",
+	"title": "Adding or deleting tags ",
+	"tags": [],
+	"description": "",
+	"content": "Content:\n Add or delete tags on a single resource Add or delete tags on groups of resources  Add or delete tags on a single resource Adding tags on a single EC2 instance:\n Navigate to the resource we want to tag, in this case we will access our Amazon EC2 Console. In the navigation bar at the top of the screen, ensure that the correct Region is selected (In this lab, we are using the Singapore region) Click on the resource to tag from the list of resources, select the Tags tab, and then select Manage tags  Next, click on Add tag. Enter Key and Value information for the tag as shown below and click Save.  We have just added a new tag to identify the operating system for EC2 Instance.\nAdd or delete tags on groups of resources Adding tags on multiple EC2 instances:\n Access the Amazon EC2 Console. In the left pane, select Tags Select Manage Tags  On the Manage Tags page, select the type of resource to filter at Filter (for example, Instances) To add tags on the resource group:  Select the resources you want to tag From the Add Tag section, fill in Key and Value of your desired tag and click Add Tag    To delete the tag on the resource group:  Select the resources which you want to remove a given tag At Remove Tag, fill in Key and select Remove Tag.    "
+},
+{
+	"uri": "/1-using-tags/1-using-tags-console/1.1.3-filter-tags/",
+	"title": "Filtering resources by tag ",
+	"tags": [],
+	"description": "",
+	"content": "Filtering a list of EC2 instances by tag  Click Instance to return to the EC2 Instance list.  Click on the Filter Instances box and then Click the Owner tag from the list.  Click on Owner: Yourname.  The results contain resources that have been tagged with your specified filter.  Once you’re done, select Clear filters to clear the filter. You can try steps 2 to 4 again with the Environment: Test Tag to find that the instance tagged with Environment: UAT is filtered out.  "
+},
+{
+	"uri": "/1-using-tags/2-using-tag-cli/",
+	"title": "Using tags via AWS CLI ",
+	"tags": [],
+	"description": "",
+	"content": "Overview In this step, you’ll familiarize yourself with performing tagging operations from the AWS CLI.\nTo do this step, you need to have AWS CLI installed on your machine. Please refer to this link for installation instructions.\n\rContent\n Overview Adding tags to an existing EC2 resource Adding a tag to a new resource Description of tagged resources  Adding tags to an existing EC2 resource From the CLI, invoke ec2 create-tags with flags —resources and —tags\n aws ec2 create-tags —resources \u0026lt;ResourceID\u0026gt; —tags Key=\u0026lt;Key\u0026gt;, value=\u0026lt;Value\u0026gt;  For example, if you wanted to create a tag of “Key=Environment, Value=Test” for an EC2 instance resource, your parameters will be:\n aws ec2 create-tags —resources i-01234example56789 —tags Key=Environment, Value=Test  Adding a tag to a new resource Add tag to new virtual machines\nFrom the CLI, invoke ec2 run-instances to create a new virtual machine and use the flag —tag-specifications to declare tag information:\naws ec2 run-instances\\ —image-id \u0026lt;image-id\u0026gt; \\ —count 1\\ —instance-type t2.micro\\ —key-name \u0026lt;YourKeyPair\u0026gt; \\ —subnet-id \u0026lt;YouSubnetID\u0026gt; \\ —tag-specifications resourceType=Instance, Tags= [{Key=Environment, Value=Test}] resourceType=Volume, Tags= [{Key=Environment, Value=Test}] #Volume created with the instance will also have the tag \u0026quot;Key=Environment, Value=Test\u0026quot;`  Note: You will have to replace the appropriate parameters for your account. The image below illustrates sample output:\nAdd tag to new drive\nFrom the CLI, invoke ec2 create-volume to create a new volume and use the flag —tag-specifications to declare the following tag information:\naws ec2 create-volume\\ —availability-zone ap-southeast-1a\\ —volume-type gp2\\ —size 80\\ —tag-specifications resourceType=Volume, Tags= [{Key=Environment, Value=Test}, {key=Cost-Center, value=CC123}]  #Volume will be assigned 2 tags as \u0026ldquo;Key=Environment, Value=Test\u0026rdquo; and \u0026ldquo;Key=Cost-Center, Value=CC123\u0026rdquo;\nNote: You will have to replace the appropriate parameters for your account. The picture below illustrates sample output:\nDescription of tagged resources From the CLI, invoke ec2 derscibe-instances with the flag —filters:\naws ec2 descripbe-instances —filters name=tag-key, Values=\u0026lt;SampleTagKey\u0026gt;  The picture below illustrates sample output:\n"
+},
+{
+	"uri": "/2-resource-group/",
+	"title": "Creating a Resource Group ",
+	"tags": [],
+	"description": "",
+	"content": "Create a Resource Group In this step, we will create a Resource Group categorized by tag.\n Go to the AWS Resource Groups Console In the left pane, click on Create Resource Group From the Create query-based group page, under Group type, select Tag-based. Under Grouping criteria, select Resource types (resource type) is AWS።EC2።Instance.  Under Tags, type tag “key=BusinessUnit, Value=Marketing” and then press Add to add the tag. Click Preview group resources to show Group Resources resources with the resource type and tag mentioned above.  In the Group details section, enter the following parameters:  Group name: MarketingBu Group description - optional: enter a description for Resource Group (eg: Servers of Marketing BU) Verify the above and click Create group.    We can skip Group tags - optional . However, if you want the Resource Group being created to be a part of a larger Resource Group, you can add a tag to the Resource Group. (Example: “Key=Organization, value=AWS”)\n\rAfter the Resource Group has been successfully created, click Saved Resource Groups in the left pane to see the Resource Group we have just created.  Click on Resource Group MarketingBu. Scroll down the Group resources section, you’ll see all the resources that belong to this Resource Group.  "
+},
+{
+	"uri": "/3-cleanup/",
+	"title": "Resource Cleanup",
+	"tags": [],
+	"description": "",
+	"content": "You may clean up the resources provisioned during this lab in the following order:\n Delete EC2 Instance  Access the EC2 Management Console On the left pane, select Intances. Select all EC2 Instances related to the lab (you can use the card to filter the instances to be deleted or refer to the created Resource Group) Click Actions. Click Manage Instance State. Click on Terminate. Click Change State, then click Terminate.    Delete Resource Group  Access the AWS Resource Group Console. Click Saved Resource Group in the left bar. Click on the Resource Group name related to the lab (MarketingBu). Click Delete, then click Delete again to confirm deletion of Resource Group.    "
+},
+{
+	"uri": "/categories/",
+	"title": "Categories",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "/tags/",
+	"title": "Tags",
+	"tags": [],
+	"description": "",
+	"content": ""
+}]
